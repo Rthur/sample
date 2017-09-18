@@ -1,0 +1,34 @@
+---
+- hosts: localhost
+  become: false
+  vars:
+    content: "{{ lookup('eightball', 'Will a black cat cross me today?') }}"
+
+  tasks:
+    - name: 'Value of var:content changes each time it is invoked:'
+      debug:
+        msg: "{{ content }}"
+
+    - name: 'Second invocation of var:content:'
+      debug:
+        msg: "{{ content }}"
+
+    - name: 'Get one respone from lookup and assign it to a new variable in order to have static values'
+      set_fact:
+        out: '{{ content }}'
+
+    - name: 'The question?'
+      debug:
+        msg: "{{ out.magic.question }}"
+
+    - name: '8Ball says:'
+      debug:
+        msg: "{{ out.magic.answer }}"
+
+    - name: '8Ball responded:'
+      debug:
+        msg: "{{ out.magic.type }}"
+
+    - debug:
+        msg: "{{ out }}"
+
