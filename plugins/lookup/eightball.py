@@ -16,5 +16,5 @@ class LookupModule(LookupBase):
       result.append(json.loads(response.content))
       return result
     else:
-      raise AnsibleParserError('No reply from %s' % (url))
+      raise AnsibleParserError('No reply from %s, error: %s' % (url, response.status_code))
   
