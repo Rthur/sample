@@ -9,7 +9,8 @@ class LookupModule(LookupBase):
   def run(self, q, **kwargs):
     result = []
     question = urllib.pathname2url(q[0])
-    path = 'https://8ball.delegator.com/magic/JSON/' + question
+    url = 'https://8ball.delegator.com'
+    path = url + '/magic/JSON/' + question
     response = requests.get(path)
     if response.ok:
       result.append(json.loads(response.content))
